@@ -7,99 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using WindowsFormsApp1.entrada_da_moeda;
+using WindowsFormsApp1.valor_de_troca;
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        valores_contados valores;
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_um_real_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_cinquenta_centavos_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_25_centavos_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_10_centavos_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_5_centavos_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_valor_trocado_TextChanged(object sender, EventArgs e)
-        {
-
+            valores = new valores_contados();
         }
 
         private void button_resolver_Click(object sender, EventArgs e)
         {
-
+            int[] receber =new int[]
+            {
+              int.Parse(um_real_receber.Text),
+              int.Parse(cinquenta_receber.Text),
+              int.Parse(vinte_e_cinco_receber.Text),
+              int.Parse(dez_receber.Text),
+              int.Parse(cinco_receber.Text)
+            };
+          valores.contagem(receber, double.Parse(troco.Text));
+            
+              
         }
     }
 }

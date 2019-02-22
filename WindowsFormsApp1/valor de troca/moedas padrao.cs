@@ -8,15 +8,15 @@ namespace WindowsFormsApp1.valor_de_troca
 {
     class moedas_padrao
     {
-        public static double[] moedas
+        public static int[] moedas
         {
             get
             {
-                double[] valores = new double[5];
-                valores[0] = 1.00;
-                valores[1] = 0.50;
-                valores[2] = 0.25;
-                valores[3] = 0.05;
+                int[] valores = new int[4];
+                valores[0] = 50;
+                valores[1] = 25;
+                valores[2] = 10;
+                valores[3] = 5;
                 return valores;
             }
         }
