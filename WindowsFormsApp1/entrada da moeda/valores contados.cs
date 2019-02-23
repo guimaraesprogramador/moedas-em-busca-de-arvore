@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WindowsFormsApp1.valor_de_troca;
+using System.Collections;
 namespace WindowsFormsApp1.entrada_da_moeda
 {
    public class valores_contados
     {
-        public static double valores { get; set; }
+        public static Stack valores { get; set; }
         public void contagem(int[] valor, double subratação)
         {
             double soma = 0.00;
@@ -16,12 +17,8 @@ namespace WindowsFormsApp1.entrada_da_moeda
             soma = total - subratação;
             double valor_monitario = 0.00;
             valor_monitario = soma / moedas_padrao.moedas[0];
-             valores =  separ_um_real(valor_monitario);
-            double nota_baixa = Math.Round((valor_monitario % moedas_padrao.moedas[4]) *100);
-            double nota_media_0_25 = Math.Round((valor_monitario % moedas_padrao.moedas[2])*100);
-            double nota_media_0_50 = Math.Round((valor_monitario % moedas_padrao.moedas[1])*100);
-            double nota_media_0_10 = Math.Round((valor_monitario % moedas_padrao.moedas[3]) * 100);
-            double s = valores + (nota_media_0_50*0.50) + (nota_media_0_25*0.25)+ (nota_media_0_10*0.10) + (nota_baixa*0.05);
+            valores = separ_moedas(soma);
+            divisao(valores);
       }
         private double somando_valor(int[] v)
         {
@@ -32,12 +29,78 @@ namespace WindowsFormsApp1.entrada_da_moeda
             }
             return somadorio;
         }
-        private double separ_um_real(double s)
+        private Stack separ_moedas(double s)
         {
-            double somadorio2 = 0.00;
-            somadorio2 = Math.Round((s % moedas_padrao.moedas[0])*10); ;
-            return somadorio2;
+            Stack moedas = new Stack(); 
+            while (s > 0)
+            {
+                if (s> moedas_padrao.moedas[0])
+                {
+                    s =  s - moedas_padrao.moedas[0];
+                    moedas.Push(moedas_padrao.moedas[0]);
+                }
+                else if (s< moedas_padrao.moedas[0])
+                {
+                    if (s > moedas_padrao.moedas[1])
+                    {
+                        s = s - moedas_padrao.moedas[1];
+                        moedas.Push(moedas_padrao.moedas[1]);
+                    }
+                   else if(s > moedas_padrao.moedas[2])
+                    {
+                        s = s - moedas_padrao.moedas[2];
+                        moedas.Push(moedas_padrao.moedas[2]);
+                    }
+                    else if(s > moedas_padrao.moedas[3])
+                    {
+                        s = s - moedas_padrao.moedas[3];
+                        moedas.Push(moedas_padrao.moedas[3]);
+                    }
+                    else if (s > moedas_padrao.moedas[4])
+                    {
+                        s = s - moedas_padrao.moedas[4];
+                        moedas.Push(moedas_padrao.moedas[4]);
+                    }
+                    else if(double.MaxValue > s)
+                    {
+                        break; 
+                    }
+                }
+                
+            }
+            return moedas;
         }
-        
+        public static int cinquenta_centavos { get; set; }
+        public static int vinte_e_cinco_centavos { get; set; }
+        public static int um_real { get; set; }
+        public static int dez_centavos { get; set; }
+        public static int cinco_centavos { get; set; }
+        private void divisao(Stack valor_principal)
+        {
+            
+            foreach (Object obj in valor_principal)
+            {
+                if (obj.ToString() == moedas_padrao.moedas[0].ToString())
+                {
+                    um_real = Convert.ToInt32(obj) + um_real;
+                }
+                else if(obj.ToString() == moedas_padrao.moedas[1].ToString())
+                {
+                    cinquenta_centavos = cinquenta_centavos + 1;
+                }
+                else if(obj.ToString() == moedas_padrao.moedas[2].ToString())
+                {
+                    vinte_e_cinco_centavos = vinte_e_cinco_centavos + 1;
+                }
+                else if(obj.ToString() == moedas_padrao.moedas[3].ToString())
+                {
+                    dez_centavos = dez_centavos + 1;
+                }
+                else if(obj.ToString() == moedas_padrao.moedas[4].ToString())
+                {
+                    cinco_centavos =   cinco_centavos+1;
+                }
+            }
+        }
     }
 }

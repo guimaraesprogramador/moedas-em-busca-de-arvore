@@ -51,6 +51,7 @@
             this.vinte_e_cinco_pagos = new System.Windows.Forms.MaskedTextBox();
             this.dez_pagos = new System.Windows.Forms.MaskedTextBox();
             this.cinco_pago = new System.Windows.Forms.MaskedTextBox();
+            this.limpar_tudo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_resolver
@@ -210,11 +211,9 @@
             // troco
             // 
             this.troco.Location = new System.Drawing.Point(280, 69);
-            this.troco.Mask = "0.0000";
             this.troco.Name = "troco";
             this.troco.Size = new System.Drawing.Size(100, 20);
             this.troco.TabIndex = 28;
-            this.troco.ValidatingType = typeof(int);
             // 
             // um_real_pagos
             // 
@@ -261,11 +260,22 @@
             this.cinco_pago.TabIndex = 33;
             this.cinco_pago.ValidatingType = typeof(int);
             // 
+            // limpar_tudo
+            // 
+            this.limpar_tudo.Location = new System.Drawing.Point(396, 311);
+            this.limpar_tudo.Name = "limpar_tudo";
+            this.limpar_tudo.Size = new System.Drawing.Size(88, 41);
+            this.limpar_tudo.TabIndex = 34;
+            this.limpar_tudo.Text = "limpar";
+            this.limpar_tudo.UseVisualStyleBackColor = true;
+            this.limpar_tudo.Click += new System.EventHandler(this.limpar_tudo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 391);
+            this.Controls.Add(this.limpar_tudo);
             this.Controls.Add(this.cinco_pago);
             this.Controls.Add(this.dez_pagos);
             this.Controls.Add(this.vinte_e_cinco_pagos);
@@ -321,6 +331,7 @@
         private System.Windows.Forms.MaskedTextBox vinte_e_cinco_pagos;
         private System.Windows.Forms.MaskedTextBox dez_pagos;
         private System.Windows.Forms.MaskedTextBox cinco_pago;
+        private System.Windows.Forms.Button limpar_tudo;
     }
 }
 
