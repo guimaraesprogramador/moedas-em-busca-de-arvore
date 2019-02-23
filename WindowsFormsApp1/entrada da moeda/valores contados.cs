@@ -23,7 +23,8 @@ namespace WindowsFormsApp1.entrada_da_moeda
         private double somando_valor(int[] v)
         {
             double somadorio = 0.00;
-            for(int i = 0; i < v.Length; i++)
+           
+            for(int i = 0; i < v.Length-1; i++)
             {
                 somadorio = somadorio+(moedas_padrao.moedas[i] * v[i]);
             }
