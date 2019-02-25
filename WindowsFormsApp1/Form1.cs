@@ -31,11 +31,11 @@ namespace WindowsFormsApp1
               int.Parse(cinco_receber.Text)
             };
           valores.contagem(receber, double.Parse(troco.Text));
-            um_real_pagos.Text = valores_contados.um_real.ToString();
-            cinquenta_pagos.Text = valores_contados.cinquenta_centavos.ToString();
-            vinte_e_cinco_pagos.Text = valores_contados.vinte_e_cinco_centavos.ToString();
-            dez_pagos.Text = valores_contados.dez_centavos.ToString();
-            cinco_pago.Text = valores_contados.cinco_centavos.ToString();
+            um_real_pagos.Text = valores.um_real.ToString();
+            cinquenta_pagos.Text = valores.cinquenta_centavos.ToString();
+            vinte_e_cinco_pagos.Text = valores.vinte_e_cinco_centavos.ToString();
+            dez_pagos.Text = valores.dez_centavos.ToString();
+            cinco_pago.Text = valores.cinco_centavos.ToString();
             
         }
 
