@@ -43,9 +43,20 @@ namespace WindowsFormsApp1
         {
             um_real_pagos.Clear();
             cinquenta_pagos.Clear();
-            vinte_e_cinco_receber.Clear();
+            vinte_e_cinco_pagos.Clear();
             dez_pagos.Clear();
             cinco_pago.Clear();
+            valores.cinco_centavos = 0;
+            valores.cinquenta_centavos = 0;
+            valores.dez_centavos = 0;
+            valores.um_real = 0;
+            valores.vinte_e_cinco_centavos = 0;
+           um_real_receber.Clear();
+            cinquenta_receber.Clear();
+            vinte_e_cinco_receber.Clear();
+            dez_receber.Clear();
+            cinco_receber.Clear();
+            troco.Clear();
         }
     }
 }
