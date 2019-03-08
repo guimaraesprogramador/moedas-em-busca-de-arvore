@@ -17,20 +17,24 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            valores = new valores_contados();
+            
         }
-
+        public Dictionary<int,int> moedas()
+        {
+            Dictionary<int, int> m = new Dictionary<int, int>();
+            m.Add(0, Convert.ToInt32(um_real_receber.Text));
+            m.Add(1, Convert.ToInt32(cinquenta_receber.Text));
+            m.Add(2, Convert.ToInt32(vinte_e_cinco_receber.Text));
+            m.Add(3, Convert.ToInt32(dez_receber.Text));
+            m.Add(4, Convert.ToInt32(cinco_receber.Text));
+            return m;
+        }
         private void button_resolver_Click(object sender, EventArgs e)
         {
-            int[] receber =new int[]
-            {
-              int.Parse(um_real_receber.Text),
-              int.Parse(cinquenta_receber.Text),
-              int.Parse(vinte_e_cinco_receber.Text),
-              int.Parse(dez_receber.Text),
-              int.Parse(cinco_receber.Text)
-            };
-          valores.contagem(receber, double.Parse(troco.Text));
+            Dictionary<int, int> valores2 = moedas();
+            double a = double.Parse(troco.Text);
+            valores = new valores_contados(valores2, a);
+
             um_real_pagos.Text = valores.um_real.ToString();
             cinquenta_pagos.Text = valores.cinquenta_centavos.ToString();
             vinte_e_cinco_pagos.Text = valores.vinte_e_cinco_centavos.ToString();
