@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsFormsApp1.valor_de_troca;
 using System.Collections;
+using System.Windows.Forms;
 namespace WindowsFormsApp1.entrada_da_moeda
 {
    public class valores_contados
     {
         List<double> filhosvivos = new List<double>();
-        List<int> filhosmorto = new List<int>();
+        List<double> filhosmorto = new List<double>();
         public valores_contados(Dictionary<int,int> moedasinicializadas,double trocada)
         {
            
@@ -20,6 +21,7 @@ namespace WindowsFormsApp1.entrada_da_moeda
             if(moedas.Values.Count > 0)
             {
                randrow(moedas,folha);
+                
             }
         }
      
@@ -38,60 +40,104 @@ namespace WindowsFormsApp1.entrada_da_moeda
         }
         public void randrow(Dictionary<int, int> value,double key)
         {
-            double escolha = 0;
-           var lista = value.Keys.ToList();
-           foreach(var i in lista)
+            var lista = value;
+            double anterior = 0;
+            
+           foreach(KeyValuePair<int,int> i in lista)
             {
-                escolha = key - lista[i] * moedas_padrao.moedas[i];
-
-
-
-            }
-        }
-        public void contagem(int[] valor, double subratação)
-        {
-            separ_moedas(subratação,valor);
-      }
-        private void separ_moedas(double s,int[] v)
-        {
-
-            int i = 0;
-            while (s > 0)
-            {
-
-                if (s>= moedas_padrao.moedas[0])
+                anterior = moedas_padrao.moedas[i.Key] * i.Value;
+                if (anterior > key)
                 {
-                    s =  s - moedas_padrao.moedas[0];
-                    um_real++;
+                    filhosmorto.Add(anterior);
                 }
-                else if (s< moedas_padrao.moedas[0])
+                else
                 {
-                    if (s >= moedas_padrao.moedas[1]&& v[i]>0)
+                    filhosvivos.Add(anterior);
+                }
+            }
+            if ( somar_mortos(filhosmorto) < key)
+            {
+                MessageBox.Show("nao existe moedas");
+            }
+            else
+            {
+                if (filhosmorto.Count > 0)
+                {
+                    for (int i = 0; i < filhosmorto.Count; i++)
                     {
-                        s = s - moedas_padrao.moedas[1];
-                        cinquenta_centavos++;
+                        julgamento(filhosmorto[i]);
                     }
-                   else if(s >= moedas_padrao.moedas[2]&& v[i]>0)
+                }
+
+                if (filhosvivos.Count > 0)
+                {
+                    for (int i = 0; i < filhosvivos.Count; i++)
                     {
-                        s = s - moedas_padrao.moedas[2];
-                        vinte_e_cinco_centavos++;
+                        separ(filhosvivos[i]);
                     }
-                    else if(s >= moedas_padrao.moedas[3]&& v[i]>0)
-                    {
-                        s = s - moedas_padrao.moedas[3];
-                        dez_centavos++;
-                    }
-                    else if (s > moedas_padrao.moedas[4]&&v[i]>0)
-                    {
-                        s = s - moedas_padrao.moedas[4];
-                        cinco_centavos++;
-                    }
-                    
-                    i++;
                 }
             }
             
+           
+        }
 
+        private double somar_mortos(List<double> filhosmorto)
+        {
+            double s = 0.00;
+            for(int i = 0; i < filhosmorto.Count; i++)
+            {
+                s = s + filhosmorto[i];
+            }
+            return s;
+        }
+
+        private void julgamento(double s)
+        {
+            for(int y= 0; y < moedas_padrao.moedas.Length; y++)
+            {
+                if(s % moedas_padrao.moedas[y] == 0)
+                {
+                    filhosvivos.Add(moedas_padrao.moedas[y]);
+                }
+            }
+        }
+        public void separ(double i)
+        {
+                        double encontrado = descobrir_valor(i);
+                        valores(encontrado, contagem(i,encontrado));
+        }
+        public double descobrir_valor(double p)
+        {
+            for(int o = 0; o < moedas_padrao.moedas.Length; o++)
+            {
+                if (p % moedas_padrao.moedas[o] == 0)
+                {
+                    return moedas_padrao.moedas[o];
+                }
+            }
+            return 0.00;
+        }
+        public void valores( double s,int valor)
+        {
+
+            if (s == moedas_padrao.moedas[0]) um_real = um_real + valor;
+            else if (s == moedas_padrao.moedas[1]) cinquenta_centavos = cinquenta_centavos + valor;
+            else if (s == moedas_padrao.moedas[2]) vinte_e_cinco_centavos = vinte_e_cinco_centavos +valor;
+            else if (s == moedas_padrao.moedas[3]) dez_centavos = dez_centavos + valor;
+            else if (s == moedas_padrao.moedas[4]) cinco_centavos = cinco_centavos + valor;
+
+
+        }
+        public int contagem(double vivos, double moeda)
+        {
+            int soma  = 0;
+            float a = float.Parse(vivos.ToString().Replace(",","."));
+            do
+            {
+                a = a - float.Parse(moeda.ToString().Replace(",", "."));
+                soma++;
+            } while (a>0);
+            return soma;
         }
         public  int cinquenta_centavos { get; set; }
         public  int vinte_e_cinco_centavos { get;set; }
